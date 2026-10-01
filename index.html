@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canada 1914–1918 — An Interactive History</title>
+  <meta name="description" content="An interactive three-part history of the Ross Rifle, the Halifax Explosion, and Vimy Ridge." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@200;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
+    <filter id="text-fluid-distort" x="-20%" y="-30%" width="140%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="2" seed="8" result="waterNoise">
+        <animate attributeName="baseFrequency" dur="9s" values="0.012 0.035;0.018 0.022;0.012 0.035" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="waterNoise" scale="13" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="loader" id="loader"><div class="loader__pct" id="loaderPct">0</div><div class="loader__label">Loading the exhibit</div><div class="loader__bar"><div id="loaderBarFill"></div></div></div>
+  <canvas id="starfield"></canvas>
+  <div id="cursor"></div><div id="cursor-ring"></div>
+  <div id="progress-bar"></div>
+
+  <nav>
+    <a class="nav-logo" href="#hero">CANADA · 1914—1918</a>
+    <div class="nav-chapter" id="nav-chapter">Prologue</div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="parallax-orb orb-teal hero-orb-a"></div>
+      <div class="parallax-orb orb-gold hero-orb-b"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">A Canadian history exhibit</div>
+        <h1 class="hero-title"><span class="hero-word" data-text="Canada">Canada</span><br><span class="hero-word" data-text="In WWI">In WWI</span></h1>
+        <p class="hero-subtitle">Canada from the First World War: the Ross Rifle, the Halifax Explosion, and the Battle of Vimy Ridge.</p>
+      </div>
+      <div class="scroll-indicator"><span>Scroll to enter</span><div class="scroll-line"></div></div>
+    </section>
+
+    <div class="h-scroll-wrapper"><div class="h-scroll-track">
+      <span class="marquee-item">Ross Rifle <i></i></span><span class="marquee-item">Halifax Explosion <i></i></span><span class="marquee-item">Vimy Ridge <i></i></span><span class="marquee-item">1914—1918 <i></i></span>
+      <span class="marquee-item">Ross Rifle <i></i></span><span class="marquee-item">Halifax Explosion <i></i></span><span class="marquee-item">Vimy Ridge <i></i></span><span class="marquee-item">1914—1918 <i></i></span>
+    </div></div>
+
+    <section id="rifle" class="story story-rifle" data-chapter="Chapter I — The Ross Rifle">
+      <div class="chapter-header">Chapter One</div>
+      <div class="story-inner rifle-layout">
+        <div class="story-copy reveal-left">
+          <div class="chapter-tag">01 · Military Technology</div>
+          <h2 class="chapter-title">The <span>Ross Rifle</span></h2>
+          <p>The Ross Rifle was developed by Sir Charles Ross. Canada wanted to make its own reliable rifle after it could not obtain the license and tools to produce the Lee-Enfield during the Second Boer War. The army adopted the Ross, and production began in 1903.</p>
+          <p>The rifle was known for its range and accuracy. It won the King’s Prize in 1911 and performed well at the 1913 Bisley Rifle Meeting in England. But target shooting was very different from trench combat. Soldiers found the Ross too long and heavy, and it could jam in the field. In 1916, British commander Sir Douglas Haig ordered Canadian troops to replace it with the Lee-Enfield.</p>
+          <div class="fact-row"><div><strong>1903</strong><span>Production begins</span></div><div><strong>1911 & 1913</strong><span>King’s Prize and Bisley success</span></div><div><strong>1916</strong><span>Replacement</span></div></div>
+        </div>
+        <div class="rifle-stage reveal-right">
+          <div id="rifle3d"><canvas id="rifleCanvas"></canvas><div class="rifle-hint">Drag to rotate · scroll to inspect</div><div class="rifle-fallback" id="rifleFallback">3D model unavailable</div></div>
+          <div class="model-label">ROSS RIFLE <span>INTERACTIVE MODEL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="halifax" class="story story-halifax" data-chapter="Chapter II — Halifax Explosion">
+      <div class="chapter-header">Chapter Two</div>
+      <div class="halifax-backdrop"><div class="blast-ring ring-1"></div><div class="blast-ring ring-2"></div><div class="blast-ring ring-3"></div></div>
+      <div class="story-inner event-layout">
+        <div class="event-number reveal-left">06<span>.12</span></div>
+        <div class="story-copy reveal-right">
+          <div class="chapter-tag">02 · The Explosion · December 6, 1917</div>
+          <h2 class="chapter-title">The Halifax<br><span>Explosion</span></h2>
+          <p>Halifax was a key wartime port, sending troops, supplies, and ammunition to europe. At 8:45 a.m. on December 6, 1917, the French munitions ship <em>Mont-Blanc</em> collided with the Norwegian relief ship <em>Imo</em> in the harbour. <em>Mont-Blanc</em> was carrying 2,925 tonnes of explosives. It caught fire and drifted toward the waterfront.</p>
+          <p>At 9:04 a.m., the ship exploded. The blast destroyed buildings across Halifax’s North End and triggered a large tidal wave. About 2,000 people were killed and thousands more were injured. At the time, it was the largest human-made explosion in history, killing about four per cent of Halifax’s population.</p>
+          <div class="timeline-mini"><div><b>8:45</b><span>Collision</span></div><div><b>9:04</b><span>Explosion</span></div><div><b>4%</b><span>Halifax's population</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vimy" class="story story-vimy" data-chapter="Chapter III — Vimy Ridge">
+      <div class="chapter-header">Chapter Three</div>
+      <div class="vimy-grid">
+        <div class="vimy-image-wrap reveal-left">
+          <div class="image-frame"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Canadian_tank_and_soldiers_Vimy_1917.jpg" alt="Canadian troops and a tank at Vimy Ridge in 1917" /></div>
+          <span class="image-caption">Canadian troops at Vimy Ridge, April 1917</span>
+        </div>
+        <div class="story-copy reveal-right">
+          <div class="chapter-tag">03 · The Front Lines · April 9—12, 1917</div>
+          <h2 class="chapter-title">Vimy <span>Ridge</span></h2>
+          <p>Vimy Ridge was a high ground in northern France, giving its defenders a view over the surrounding flat land. Germany had turned it into a strong defensive position, with trenches, tunnels, and machine guns.</p>
+          <p>The Canadian Corps spent the winter of 1916–1917 preparing. Soldiers studied maps, gattered information about the German's defence, and practised on models of the trenches. All four Canadian divisions took part with nearly 100,000 soldiers involved. At 5:30 a.m. on April 9, about 15,000 Canadians began the assault. Most of the ridge had been captured by the end of the day, and the rest was taken by April 12.</p>
+          <div class="vimy-stat"><strong>10,602</strong><span>Canadian casualties at Vimy</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="finale" data-chapter="Epilogue">
+      <p class="finale-pre">Canada · The great war</p>
+      <h2 class="finale-title">Remember<br><span>the stories.</span></h2>
+      <p class="finale-sub">The Ross Rifle, the Halifax Explosion, and Vimy Ridge tell three different stories of Canada’s First World War: the equipment soldiers carried, the disastrous explosion, and the battle that cost thousands of lives.</p>
+      <div class="cta-group"><a href="#hero" class="cta-primary">Return to start ↑</a><a href="#rifle" class="cta-secondary">Revisit Chapter I</a></div>
+    </section>
+  </main>
+
+  <footer><span>CANADA · 1914—1918</span><span>Interactive history exhibit</span><span>© 2026</span></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
