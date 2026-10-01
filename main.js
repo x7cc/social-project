@@ -1,4 +1,4 @@
-/* Canada 1914–1918 — interactive exhibit */
+/* Canada interactive exhibit */
 (() => {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
@@ -23,7 +23,7 @@
   window.addEventListener('load', () => setTimeout(finishLoader, 350));
   setTimeout(finishLoader, 4500);
 
-  // Animated starfield with occasional shooting stars
+  // Animated starfield with shooting stars
   const starCanvas = $('#starfield');
   const ctx = starCanvas?.getContext('2d');
   let stars = [], shooters = [], lastShot = 0;
@@ -78,7 +78,7 @@
   const cursor = $('#cursor'), ring = $('#cursor-ring');
   let mx = -100, my = -100, rx = -100, ry = -100;
   addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  // Mouse stirs the title's liquid highlight; it eases back to a calm shimmer.
+  // title liquid highlight
   $$('.hero-word').forEach(word => {
     let tx = 50, ty = 50, x = 50, y = 50, vx = 0, vy = 0, active = false;
     word.addEventListener('pointermove', e => {
@@ -89,7 +89,7 @@
     });
     word.addEventListener('pointerleave', () => { tx = 50; ty = 50; active = false; });
     const stir = () => {
-      // Spring-like follow creates a small wake; damping lets the surface settle.
+      // Spring-like small wake
       vx = (vx + (tx-x) * (active ? .16 : .075)) * .82;
       vy = (vy + (ty-y) * (active ? .16 : .075)) * .82;
       x += vx; y += vy;
@@ -133,7 +133,7 @@
     $$('.reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
   } else $$('.reveal-left, .reveal-right').forEach(el => el.classList.add('visible'));
 
-  // Subtle mouse-reactive title highlight (like light moving across water).
+  // Subtle mouse-reactive title highlight
   const heroTitle = $('.hero-title');
   addEventListener('pointermove', e => {
     if (!heroTitle) return;
@@ -142,7 +142,7 @@
     heroTitle.style.setProperty('--mouse-y', `${Math.max(0, Math.min(100, (e.clientY-r.top)/r.height*100))}%`);
   }, {passive:true});
 
-  // Reliable seamless horizontal ticker; use measured half-track width.
+  // horizontal ticker
   const ticker = $('.h-scroll-track');
   if (ticker) {
     let offset = 0, previous = 0, halfWidth = 0, paused = false;
@@ -159,13 +159,13 @@
     requestAnimationFrame(tickerFrame);
   }
 
-  // Gentle hero parallax
+  // Gentle parallax
   addEventListener('scroll', () => {
     const y = Math.min(scrollY, innerHeight), hero = $('.hero-content');
     if (hero && innerWidth > 800) hero.style.transform = `translateY(${y * .12}px)`;
   }, {passive:true});
 
-  // Load the supplied GLB, preserving its original wood/metal colors and textures.
+  // Load the supplied GLB
   function initRifle() {
     const host = $('#rifle3d'), canvas = $('#rifleCanvas'), fallback = $('#rifleFallback');
     if (!host || !canvas) return;
@@ -193,7 +193,7 @@
     const loader = new THREE.GLTFLoader();
     loader.load('rifle-model.glb', gltf => {
       model = gltf.scene;
-      // Fix only transparency flags; do not flatten or recolor the supplied model.
+      // Fix transparency flags
       model.traverse(obj => {
         if (!obj.isMesh) return;
         obj.castShadow = true; obj.receiveShadow = true;
@@ -210,12 +210,12 @@
           mat.needsUpdate = true;
         });
       });
-      // Center and scale from the actual model bounds, regardless of its source units.
+      // Center and scale from model bounds
       let box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
       model.position.sub(center);
-      // The source rifle is authored along X with its optic facing upward after a -90° X rotation.
+      //source rifle upright
       model.rotation.x = -Math.PI / 2;
       const maxDim = Math.max(size.x, size.y, size.z) || 1;
       model.scale.setScalar(7.6 / maxDim);
